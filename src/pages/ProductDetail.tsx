@@ -16,28 +16,18 @@ export function ProductDetail() {
 
   const product = products.find(p => p.slug === slug || p.id === slug);
 
-  if (loading) {
+  if (loading || !product) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="w-12 h-12 border-4 border-[#3d4f5c] border-t-transparent rounded-full animate-spin"></div>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
+        <div className="relative">
+          <div className="w-20 h-20 border-4 border-slate-300 rounded-full animate-pulse"></div>
+          <div className="absolute top-0 left-0 w-20 h-20 border-4 border-slate-600 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+        <p className="mt-6 text-slate-600 text-lg font-medium animate-pulse">Loading product details...</p>
       </div>
     );
   }
 
-  if (!product) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-[#3d4f5c] mb-4">Product Not Found</h1>
-          <p className="text-gray-600 mb-4">Looking for: {slug}</p>
-          <p className="text-gray-600 mb-4">Found {products.length} products total</p>
-          <Link to="/" className="text-[#3d4f5c] hover:underline font-semibold">
-            Return to Home
-          </Link>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-white">
