@@ -1,6 +1,6 @@
 import { Zap, Shield, CheckCircle, Instagram, MapPin, Lock } from 'lucide-react';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useProducts } from '../hooks/useProducts';
 import { useAuth } from '../contexts/AuthContext';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
@@ -111,21 +111,20 @@ export function Home() {
           ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {displayedProducts.map((product, index) => (
-              <Link
+              <div
                 key={product.id}
-                to={`/product/${product.slug || product.id}`}
                 className={`relative group transition-all duration-700 block ${productsAnimation.isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-slate-700/80 to-slate-900/80 backdrop-blur-xl rounded-lg transform transition-transform group-hover:scale-105"></div>
-                <div className="relative bg-white/90 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition cursor-pointer">
+                <div className="relative bg-white/90 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition">
                   {product.imageUrl && <img src={product.imageUrl} alt={product.name} className="w-full h-64 object-cover" />}
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-[#3d4f5c] mb-2">{product.name}</h3>
                     <p className="text-gray-600 line-clamp-3">{product.description}</p>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
           )}

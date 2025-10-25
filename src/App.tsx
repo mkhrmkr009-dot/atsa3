@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { Home } from './pages/Home';
-import { ProductDetail } from './pages/ProductDetail';
 import { AdminLogin } from './pages/AdminLogin';
 import { AdminDashboard } from './pages/AdminDashboard';
 
@@ -44,14 +43,6 @@ function App() {
             element={
               <AuthRequiredRoute>
                 <Home />
-              </AuthRequiredRoute>
-            }
-          />
-          <Route
-            path="/product/:slug"
-            element={
-              <AuthRequiredRoute>
-                <ProductDetail />
               </AuthRequiredRoute>
             }
           />
