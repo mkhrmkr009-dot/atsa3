@@ -11,12 +11,7 @@ export function ProductDetail() {
   const contentAnimation = useScrollAnimation();
   const relatedAnimation = useScrollAnimation();
 
-  console.log('Looking for product with slug:', slug);
-  console.log('Available products:', products.map(p => ({ id: p.id, name: p.name, slug: p.slug })));
-
-  const product = products.find(p => p.slug === slug || p.id === slug);
-
-  if (loading || !product) {
+  if (loading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
         <div className="relative">
@@ -24,6 +19,30 @@ export function ProductDetail() {
           <div className="absolute top-0 left-0 w-20 h-20 border-4 border-slate-600 border-t-transparent rounded-full animate-spin"></div>
         </div>
         <p className="mt-6 text-slate-600 text-lg font-medium animate-pulse">Loading product details...</p>
+      </div>
+    );
+  }
+
+  console.log('Looking for product with slug:', slug);
+  console.log('Available products:', products.map(p => ({ id: p.id, name: p.name, slug: p.slug })));
+
+  const product = products.find(p => p.slug === slug || p.id === slug);
+
+  if (!product) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-slate-700 mb-4">Product Not Found</h1>
+          <p className="text-slate-600 mb-4">The product "{slug}" could not be found.</p>
+          <p className="text-slate-500 mb-6">Total products: {products.length}</p>
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 bg-slate-600 text-white px-6 py-3 rounded-lg hover:bg-slate-700 transition font-semibold"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            Back to Home
+          </Link>
+        </div>
       </div>
     );
   }
